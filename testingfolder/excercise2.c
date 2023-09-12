@@ -1,27 +1,33 @@
 /*
     Name: Rin Meng
     Student ID: 51940633
-    Program name: "excercise3"
+    Program name: "excercise2"
 */
 #include <stdio.h>
 int main()
 {
-    int n1;
-    int n2;
-
-    printf("Enter a number: ");
-    scanf("%d", &n1);
-    printf("Enter another number: ");
-    scanf("%d", &n2);
-
-    if (n1 > n2)
+    int arr[10];
+    int max = 0;
+    int min = 0;
+    for (int i = 0; i < 10; i++)
     {
-        printf("%d is larger than %d", n1, n2);
+        printf("Enter a number: ");
+        scanf("%d", &arr[i]);
+
+        if (arr[i] < min)
+        {
+            min = arr[i];
+        }
+        if (arr[i] > max)
+        {
+            max = arr[i];
+        }
     }
-    else
+    for (int i = 0; i < 10; i++)
     {
-        printf("%d is less than or equal to %d", n1, n2);
+        printf("Guess #%d is %d\n", i + 1, arr[i]);
     }
+    printf("Max is: %d, Min is: %d", max, min);
 
     return 0;
 }
