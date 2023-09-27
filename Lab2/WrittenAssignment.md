@@ -4,13 +4,11 @@
 
 ```mips
 main:
-    # assuming g var is stored on this file
     lw $t0, g
     lw $t1, h
     subi $s0, $t1, 5
     add $s1, $t0, $s0
     sw $s1, f
-
 ```
 
 ### b. Exercise 2.2: (Textbook, pages 164)
