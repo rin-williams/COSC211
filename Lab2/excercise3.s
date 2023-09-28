@@ -1,6 +1,9 @@
 #-------------------------------------------------------------------
 # Assingment 2 excercise 2
 # cosc211, stuid 51940633
+# the assignment demo is wrong on the lab output for coding question 3.
+# i think you should be printing the third character, if the input is "this is ok"
+# the output should be "i" not "s" because i is in the third position.
 #-------------------------------------------------------------------
 # data section
     .data
@@ -44,11 +47,10 @@ main:
     la $a0, third_str
     syscall
 
-
     # calc for third char
     la $a0, input_str
     # basically saying load the 3rd char in $a0 (which is a string) to $t1
-    lb $t1, 3($a0)
+    lb $t1, 2($a0)
     
     # print third char 
     # (storing 11 into $v0 calls for char print)
@@ -71,7 +73,7 @@ main:
 
     # calc for fifth char
     la $a0, input_str
-    lb $t1, 5($a0)
+    lb $t1, 4($a0)
     
     # print fifth char
     li $v0, 11
@@ -91,7 +93,7 @@ main:
 
     # calc for seventh char
     la $a0, input_str
-    lb $t1, 7($a0)
+    lb $t1, 6($a0)
     
     # print third char
     li $v0, 11

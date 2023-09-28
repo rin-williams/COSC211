@@ -53,6 +53,6 @@ len:
      .word 0
 buffer:
      .space 10
-     .align 4
+#      .align 4
 str:
      .asciiz "Hello, Your ID = "  #directive for non-terminated string

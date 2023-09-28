@@ -5,16 +5,19 @@
 ## Question 2: What are the memory addresses of the data labelled len, buffer, and str?
 
 ```
-    [00400028] 3c011001  lui $1, 4097 [str]
-    [0040002c] 34240010  ori $4, $1, 16 [str]
-    [00400038] 3c011001  lui $1, 4097 [buffer]
-    [0040003c] 34240004  ori $4, $1, 4 [buffer]
-    [00400048] 3c011001  lui $1, 4097 [buffer]
-    [0040004c] 34280004  ori $8, $1, 4 [buffer]
-    [00400050] 3c011001  lui $1, 4097 [len]
-    [00400054] 34300000  ori $16, $1, 0 [len]
+    R4  [a0] = 10010010 (str)
+    R4  [a0] = 10010004 (first buffer)
+    R8  [t0] = 10010004 (second buffer)
+    R16 [s0] = 10010000 (len)
 ```
 
 ## Question 3: Will your answer to Question 2 the same if the directive ".align 4" is commented out? Why?
 
-- Yes, because the default alignment of bytes in MIPS assembly is 4 so it will not affect the memory.
+```
+    R4  [a0] = 1001000e (str)
+    R4  [a0] = 10010004 (first buffer)
+    R8  [t0] = 10010004 (second buffer)
+    R16 [s0] = 10010000 (len)
+```
+
+- No, the memory of str is changed from `10010010` to `1001000e` because the align memory reserves room for memory.

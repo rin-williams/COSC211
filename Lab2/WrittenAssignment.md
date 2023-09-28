@@ -15,7 +15,8 @@ main:
 
 ```c
 int main(){
-    f = g + h;
+    // assume g, h and i are assigned values
+    int f = g + h;
     f = i + f;
 }
 ```
@@ -30,7 +31,7 @@ main:
     # code out B[8] = A[i−j]; in MIPS
 
     #sub i from j
-    sub $t0, $s3, s4
+    sub $t0, $s3, $s4
 
     # store the
     sw $t0($s7), 8($s6)
