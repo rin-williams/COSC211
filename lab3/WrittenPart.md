@@ -1,4 +1,4 @@
-# Written Part
+# Written Part (best to be opened in markdown)
 
 - i. 2.8 (1 mark)
   - 0xABCDEF12 to decimal is
@@ -8,34 +8,100 @@
   - 10\*16^7 + 11\*16^6 + 12\*16^5 + 13\*16^4 + 14\*16^3 +
   - 15\*16^2 + 1\*16^1 + 2\*16^0
   - the result equals to 2882400018
+  ---
 - ii. 2.12.1 (1 mark)
-  - Assume that registers $s0 and $s1 hold the values 0x80000000 and - 0xD0000000, respectively.
-  - What is the value of $t0 for the following assembly code? add $t0, $s0, $s1
-  - The value of $t0 = $s0 + $s1 = 0x80000000 + 0xD0000000 =
-  - since mips register is 32 bit only, it can only show 8 digits.
-  - since d is 13, 8+13 = 21, but 21 as a hexadecimal is 15, so we have
-  - 0x80000000 + 0xD0000000 = 0x150000000
+  - $t0 = $s0 + $s1 = 0x80000000 + 0xD0000000
+  - since D is 13, 8 + 13 = 21, but 21 as a hexadecimal is 15, we have
+  - 0x80000000 + 0xD0000000 = 0x150000000 (note that this will overflow and the result will be 0x50000000)
+  ---
 - iii. 2.12.2 (1 marks)
-  - Is the result in $t0 the desired result, or has there been overflow?
   - The result is not the desired result, there has been overflow.
   - The result is 0x50000000, but the desired result is 0x150000000
+  ---
 - iv. 2.12.3 (1 mark)
-
-  - For the contents of registers $s0 and $s1 as specified above,
-    what is the value of $t0 for the following assembly code?
-    sub $t0, $s0, $s1.7
-    - The value of $t0 = $s0 - $s1 = 0x80000000 - 0xD0000000 = 0x50000000
-    - we know that 8 - 13 = -5 for 13 is D represented in hexadecimal
-    - so the output will be 0x80000000 - 0xD0000000 = -0x50000000
-
+  - $t0 = $s0 - $s1 = 0x80000000 - 0xD0000000
+  - we know that 8 - 13 = -5 for 13 is D represented in hexadecimal
+  - so the output will be 0x80000000 - 0xD0000000 = -0x50000000
+  ---
 - v. 2.12.4 (1 marks)
   - Is the result in $t0 the desired result, or has there been overflow?
-  - The result is not the desired result, there has been overflow.
-  - The result is -0x50000000
+  - The result is the desired result, there has not been an overflow. (user performed sub, not subu)
 - vi. 2.12.5 (1 mark)
+  - $s0, $s1 = 0x80000000, 0xD0000000
+  - first line is $t0 = $s0 + $s1
+  - second line is $t0 = $t0 + $s0
+  - so, $t0 = 0x80000000 + 0xD0000000 + 0x80000000
+  - $t0 = 0x80000000 + 0xD0000000 = 0x50000000
+  - $t0 = 0x50000000 + 0x80000000 = 0xD0000000
 - vii. 2.12.6 (1 marks)
+  - in this case, there are overflow in the first line, so it will affect the second one, and the result will be different. which could have been 0x1D0000000, but it will be 0xD0000000
 - viii. 2.14 (2 mark)
+  - turn `0000 0010 0001 0000 1000 0000 0010 0000` into assembly language
+  - 31-26 is opcode, we have `000000` (sll)
+  - 25-21 is rs, we have `10000` ($s0)
+  - 20-16 is rt, we have `10000` ($s0)
+  - 15-11 is rd, we have `10000` ($s0)
+  - 10-6 is shamt, we have `00000` 
+  - 5-0 is funct, we have `100000` (add)
+  - so the assembly language is `add $s0, $s0, $s0`
 - ix. 2.15 (1 mark)
+  - Provide the type and hexadecimal representation of
+following instruction: `sw $t1, 32($t2)`
+  - this is an I-type instruction
+  - opcode is `101011` (sw)
+  - rs is `01010` ($t2)
+  - rt is `01001` ($t1)
+  - immediate is `0000000000100000` (number 32)
+  - the full instruction is `1010 1101 0100 1001 0000 0000 0010 0000`
+  - so the hexa decimal is
+  - `1010` is 2^3 + 2^1 = 10 = A
+  - `1101` is 2^3 + 2^2 + 2^0 = 13 = D
+  - `0100` is 2^2 = 4 = 4
+  - `1001` is 2^3 + 2^0 = 9 = 9
+  - `0000` is 0
+  - `0000` is 0
+  - `0010` is 2 = 2
+  - `0000` is 0
+  - so the hexa decimal is `0xD490020`
 - x. 2.19.1 (1 mark)
+  - `$t0 = 0xAAAAAAAA`
+  - `$t1 = 0x12345678`
+  - apply the following instructions
+  - `sll $t2, $t0, 44`
+  - `or $t2, $t2, $t1`
+  - first, `$t0` value in binary is
+  - `1010 1010 1010 1010 1010 1010 1010 1010`
+  - `sll $t2, $t0, 44` will be
+  - `0000 0000 0000 0000 0000 0000 0000 0000` stored in `$t2`
+  - `0001 0010 0011 0100 0101 0110 0111 1000` is binary value of `$t1`
+  - so when `or` with `$t2`, we have
+  - `0001 0010 0011 0100 0101 0110 0111 1000`
+  - which is the same value as `$t1`
 - xi. 2.19.2 (1 mark)
+  - `$t0 = 0xAAAAAAAA`
+  - `$t1 = 0x12345678`
+  - now perform
+  - `sll $t2, $t0, 4`
+  - `andi $t2, $t2, −1`
+  - first, `$t0` value in binary is
+  - `1010 1010 1010 1010 1010 1010 1010 1010`
+  - `sll $t2, $t0, 4` will be
+  - `1010 1010 1010 1010 1010 1010 1010 0000` stored in `$t2`
+  - `1111 1111 1111 1111 1111 1111 1111 1111` is binary value of `-1`
+  - so when `andi` `$t2` with `-1`, we have
+  - `1010 1010 1010 1010 1010 1010 1010 0000`
+  - which is the same value as we had before doing the andi operation, `0xAAAAAAA0`
 - xii. 2.19.3 (1 mark)
+  - `$t0 = 0xAAAAAAAA`
+  - `$t1 = 0x12345678`
+  - now perform
+  - `srl $t2, $t0, 3`
+  - `andi $t2, $t2, 0xFFEF`
+  - first, `$t0` value in binary is
+  - `1010 1010 1010 1010 1010 1010 1010 1010`
+  - `srl $t2, $t0, 3` will be
+  - `0001 0101 0101 0101 0101 0101 0101 0101` stored in `$t2`
+  - `0000 0000 0000 0000 1111 1111 1110 1111` is binary value of `0xFFEF`
+  - so when `andi` `$t2` with `0xFFEF`, we have
+  - `0000 0000 0000 0000 0101 0101 0100 0101`
+  - which is the hex value of `0x00005545`
