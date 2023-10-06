@@ -85,7 +85,10 @@ calculateBase16:
     # get the remainder of the first calculation because we know it is going to be < 15 for sure.
     mfhi $s4
 
-    blt $s3, 10, is0to9first
+    # blt $s3, 10, is0to9first
+    # if $s3 is less than 10, it must be 0-9
+    slti $t9, $s3, 10
+    beq $t9, 1, is0to9first
     
     # if not, it must be A-F
     addi $s3, $s3, 55
@@ -102,7 +105,11 @@ printHexFirstIndex:
 
 calcSecondIndex:
     # recall that $s4 is the second remainder
-    blt $s4, 10, is0to9second
+    # blt $s4, 10, is0to9second
+    # if $s4 is less than 10, it must be 0-9
+    slti $t9, $s4, 10
+    beq $t9, 1, is0to9second
+
     addi $s4, $s4, 55
     j printSecondIndex
 is0to9second:

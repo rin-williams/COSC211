@@ -29,10 +29,14 @@ main:
     move $s0, $v0
     # $s0 now contains the input from 0-255.
     
-    #if greater than 255, or less than 0 j to notInRange
-    bgt $s0, 255, notInRange
-    blt $s0, 0, notInRange
-
+    # if input is 255, is 255<256? yes, then return  1, if return 1, it will continue.
+    slti $t0, $s0, 256
+    beq $t0, 0, notInRange
+    
+    # if input is 0, is -1<-0? yes, then return  1, if return 1, it will continue.
+    li $t0, -1
+    slt $t0, $t0, $s0
+    beq $t0, 0, notInRange
 
     # print line break
     li $v0, 11
