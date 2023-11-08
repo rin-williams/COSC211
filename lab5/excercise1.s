@@ -43,6 +43,8 @@ multiply:
 
     addu $t2, $t2, $t0
 
+    # FIX ME: DOESNT WORK WHEN BOTH ARE NEGATIVE
+
     # now calculate if there is overflow
     xor $s2, $s0, $t2   # $s2 contains the sign bit of $s0 and $t2
     xor $s3, $s1, $t2   # $s3 contains the sign bit of $s1 and $t2
