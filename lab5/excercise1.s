@@ -40,18 +40,16 @@ multiply:
     andi $t3, $t1, 1    # check if current bit is a 1
     beqz $t3, isZero
     # first save $t0 and $t2 to check for overflow
-
-    addu $t2, $t2, $t0
-
-    # FIX ME: DOESNT WORK WHEN BOTH ARE NEGATIVE
+    addu $t4, $t2, $t0  # temp
 
     # now calculate if there is overflow
-    xor $s2, $s0, $t2   # $s2 contains the sign bit of $s0 and $t2
-    xor $s3, $s1, $t2   # $s3 contains the sign bit of $s1 and $t2
-    and $s4, $s2, $s3   # $s4 contains the sign bit of $s0 and $s1
-    bltz $s4, error     # if $s4 is negative, then there is overflow
-    
+    xor $t5, $t2, $t4   # $t5 = op1 ^ result
+    xor $t6, $t0, $t4   # $t6 = op2 ^ result
+    and $t5, $t5, $t6   # $t5 = (op1 ^ result) & (op2 ^ result)
+    bltz $t5, error     # if $t5 < 0, jump to error
 
+    # if no overflow, we update the sum
+    addu $t2, $t2, $t0
 isZero:
     # if it is zero, we skip
     # shift the multiplicand to left

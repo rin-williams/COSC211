@@ -1,6 +1,6 @@
 # Written Assignment
 
-## Note: It is reccomended that you open in [markdown viewer](https://upmath.me/) to see this document properly, as it contains KaTeX equations
+## Note: It is recomended that you open in [markdown viewer](https://upmath.me/) to see this document properly, as it contains KaTeX equations
 
 1. (/8) Exercises (from 5th edition)
 
@@ -8,8 +8,8 @@
 
    - 185 = `10111001`
    - 122 = `01111010`
-   - $$185 - 122$$
-   - = `00111111` = 63
+   - $$185 - 122=$$
+   - `00111111` = 63
    - There are no overflow or underflow. This is because the result is within the range of 8-bit unsigned integer, which is 0 to 255.
 
    b. 3.20 [5] <§3.5> What decimal number does the bit pattern `0×0C000000` represent if it is a two’s complement integer? An unsigned integer?
@@ -28,10 +28,10 @@
 
    - The bit pattern 0x0C000000 represents the binary number `0000 1100 0000 0000 0000 0000 0000 0000` for floating point number
    - First bit is sign bit, which is 0, so the number is positive
-   - The next 8 bits are exponent bits, which is `0000 1100` = $$1 \times 2^{3} + 1 \times 2^{2} = 12$$
-   - The last 23 bits are fraction bits, which is `0000 0000 0000 0000 0000 0000` = 0
+   - The next 8 bits are exponent bits, which is `000 1100 0` = $$1 \times 2^{4} + 1 \times 2^{3} = 24$$
+   - The last 23 bits are fraction bits, which is `000 0000 0000 0000 0000 0000` = 0
    - The formula is $$(-1)^s \times (1 + \text{Fraction}) \times 2^{(\text{Exponent} - \text{Bias})}$$
-   - The value in decimal number is $$(-1)^0 \times (1 + 0) \times 2^{(12 - 127)} = 2^{-115}$$
+   - The value in decimal number is $$(-1)^0 \times (1 + 0) \times 2^{(24 - 127)} = 2^{-103}$$
 
    e. 3.23 [10] <§3.5> Write down the binary representation of the decimal number 63.25 assuming the IEEE 754 single precision format.
 
