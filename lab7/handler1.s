@@ -28,8 +28,6 @@ save0: .word 0
 	beq $at, 4, bAddr
 	j done
 overflow:
-	# for some reason the testexception.s does not throw
-	# an overflow exception.  I am not sure why.
 	li $v0, 4
 	la $a0, exceptionText
 	syscall
@@ -74,10 +72,10 @@ done:
 	mtc0 $k0, $14
 	mtc0 $0, $13
 
-	# mfc0 $k0, $12
-	# andi $k0, 0xfffd
-	# ori $k0, 0x1
-	# mtc0 $k0, $12
+	mfc0 $k0, $12
+	andi $k0, 0xfffd
+	ori $k0, 0x1
+	mtc0 $k0, $12
 
 	lw $at, save0	  	# restore $at 
 	eret	              	# return to EPC	
