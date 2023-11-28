@@ -50,15 +50,15 @@
 
 - 5.3.1 [5] <§5.3> What is the cache block size (in words)?
 
-  - $$2^5 = 32 \space words$$
+  $$2^5 = 32 \space words$$
 
 - 5.3.2 [5] <§5.3> How many entries does the cache have?
 
-  - $$2^5 = 32 \space entries$$
+  $$2^5 = 32 \space entries$$
 
 - 5.3.3 [5] <§5.3> What is the ratio between total bits required for such a cache implementation over the data storage bits?
 
-  - $$32 \times 32 = 1024$$
+  $$32 \times 32 = 1024$$
 
 3. 5.6 In this exercise, we will look at the diff erent ways capacity aff ects overall performance. In general, cache access time is proportional to capacity. Assume that main memory accesses take 70 ns and that memory accesses are 36% of all instructions. The following table shows data for L1 caches attached to each of two processors, P1 and P2
 
@@ -69,15 +69,37 @@
 
 - 5.6.1 [5] <§5.4> Assuming that the L1 hit time determines the cycle times for P1 and P2, what are their respective clock rates?
 
-  -
+  $$Clock \space rate / Clock \space speed = \frac{1}{Cycle \space time \space (Hit \space time)}$$
+
+  $$P1_{clock \space rate} = \frac{1}{0.66} = 1.5 \space GHz$$
+
+  $$P2_{clock \space rate} = \frac{1}{0.90} = 1.1 \space GHz$$
 
 - 5.6.2 [5] <§5.4> What is the Average Memory Access Time for P1 and P2?
 
-  -
+  $$Miss \space penalty = Miss \space time - Hit \space time$$
+
+  $$P1_{miss \space penalty} = 70 - 0.66 = 69.34 \space ns$$
+
+  $$P2_{miss \space penalty} = 70 - 0.90 = 69.10 \space ns$$
+
+  $$AMAT = Hit \space time + (Miss \space rate \times Miss \space penalty) $$
+
+  $$P1_{AMAT} = 0.66 + (0.08 \times 70 )= 6.26 \space ns $$
+
+  $$P2_{AMAT} = 0.90 + (0.06 \times 70) = 4.50 \space ns $$
 
 - 5.6.3 [5] <§5.4> Assuming a base CPI of 1.0 without any memory stalls, what is the total CPI for P1 and P2? Which processor is faster?
 
-  -
+  $$Cycle \space Per \space Instruction = Base \space CPI + (Miss \space rate \times Miss \space penalty)$$
+
+  $$P1_{CPI} = 1 + (0.36 \times 6.26) = 3.25$$
+
+  $$P2_{CPI} = 1 + (0.36 \times 4.50) = 2.62$$
+
+  - P2 is faster, because it has lower CPI.
+
+---
 
 4. ![5.13](./q513.png)
 
