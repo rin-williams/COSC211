@@ -8,39 +8,39 @@
 
   - With 16 one-word blocks, we have 16 cache block. We need 4 bits to represent the index (2^4 = 16). The remaining bits will be used for the tag and the block offset.
 
-  | word addy | binary addy | tag  | index given | hit/miss |
-  | --------- | ----------- | ---- | ----------- | -------- |
-  | 3         | 00000011    | 0000 | 0011 = 3    | miss     |
-  | 180       | 10110100    | 1011 | 0100 = 4    | miss     |
-  | 43        | 00101011    | 0010 | 1011 = 19   | miss     |
-  | 2         | 00000010    | 0000 | 0010 = 2    | miss     |
-  | 191       | 10111111    | 1011 | 1111 = 15   | miss     |
-  | 88        | 01011000    | 0101 | 1000 = 8    | miss     |
-  | 190       | 10111110    | 1011 | 1110 = 14   | miss     |
-  | 14        | 00001110    | 0000 | 1110 = 14   | miss     |
-  | 181       | 10110101    | 1011 | 0101 = 5    | miss     |
-  | 44        | 00101100    | 0010 | 1100 = 12   | miss     |
-  | 186       | 10111010    | 1011 | 1010 = 10   | miss     |
-  | 253       | 11111101    | 1111 | 1101 = 13   | miss     |
+  | word addy | binary addy | tag  | index     | hit/miss |
+  | --------- | ----------- | ---- | --------- | -------- |
+  | 3         | 00000011    | 0000 | 0011 = 3  | miss     |
+  | 180       | 10110100    | 1011 | 0100 = 4  | miss     |
+  | 43        | 00101011    | 0010 | 1011 = 11 | miss     |
+  | 2         | 00000010    | 0000 | 0010 = 2  | miss     |
+  | 191       | 10111111    | 1011 | 1111 = 15 | miss     |
+  | 88        | 01011000    | 0101 | 1000 = 8  | miss     |
+  | 190       | 10111110    | 1011 | 1110 = 14 | miss     |
+  | 14        | 00001110    | 0000 | 1110 = 14 | miss     |
+  | 181       | 10110101    | 1011 | 0101 = 5  | miss     |
+  | 44        | 00101100    | 0010 | 1100 = 12 | miss     |
+  | 186       | 10111010    | 1011 | 1010 = 10 | miss     |
+  | 253       | 11111101    | 1111 | 1101 = 13 | miss     |
 
 - 5.2.2 [10] <§5.3> For each of these references, identify the binary address, the tag, and the index given a direct-mapped cache with two-word blocks and a total size of 8 blocks. Also list if each reference is a hit or a miss, assuming the cache is initially empty.
 
   - With two-word blocks and a total size of 8 blocks, 2^3 = 8, we need 3 bits to represent the index. The remaining bits will be used for the tag and the block offset.
 
-  | word addy | binary addy | tag    | index given | hit/miss |
-  | --------- | ----------- | ------ | ----------- | -------- |
-  | 3         | 00000011    | 000000 | 001 = 3     | miss     |
-  | 180       | 10110100    | 101101 | 000 = 0     | miss     |
-  | 43        | 00101011    | 001010 | 011 = 3     | miss     |
-  | 2         | 00000010    | 000000 | 010 = 2     | miss     |
-  | 191       | 10111111    | 101111 | 111 = 7     | miss     |
-  | 88        | 01011000    | 010110 | 000 = 0     | miss     |
-  | 190       | 10111110    | 101111 | 110 = 6     | miss     |
-  | 14        | 00001110    | 000011 | 110 = 6     | miss     |
-  | 181       | 10110101    | 101101 | 001 = 1     | miss     |
-  | 44        | 00101100    | 001011 | 100 = 4     | miss     |
-  | 186       | 10111010    | 101110 | 010 = 2     | miss     |
-  | 253       | 11111101    | 111111 | 101 = 5     | miss     |
+  | word addy | binary addy | tag  | index | offset | hit/miss |
+  | --------- | ----------- | ---- | ----- | ------ | -------- |
+  | 3         | 00000011    | 0000 | 001   | 1      | miss     |
+  | 180       | 10110100    | 1011 | 010   | 0      | miss     |
+  | 43        | 00101011    | 0010 | 101   | 1      | miss     |
+  | 2         | 00000010    | 0000 | 001   | 0      | hit      |
+  | 191       | 10111111    | 1011 | 111   | 1      | miss     |
+  | 88        | 01011000    | 0101 | 100   | 0      | miss     |
+  | 190       | 10111110    | 1011 | 111   | 0      | hit      |
+  | 14        | 00001110    | 0000 | 111   | 0      | miss     |
+  | 181       | 10110101    | 1011 | 010   | 1      | hit      |
+  | 44        | 00101100    | 0010 | 110   | 0      | miss     |
+  | 186       | 10111010    | 1011 | 101   | 0      | miss     |
+  | 253       | 11111101    | 1111 | 110   | 1      | miss     |
 
 ---
 
@@ -107,9 +107,21 @@
 
 4. ![5.13](./q513.png)
 
-   Consider the following address sequence: 0, 2, 4, 8, 10, 12, 14, 16, 0
+5.13 In this exercise, we will examine how replacement policies impact miss rate. Assume a 2-way set associative cache with 4 blocks. To solve the problems in this exercise, you may find it helpful to draw a table like the one below, as demonstrated for the address sequence "0, 1, 2, 3, 4."
+
+| Address | Hit/Miss | Evicted block | set 0  | set 0  | set 1  | set 1  |
+| ------- | -------- | ------------- | ------ | ------ | ------ | ------ |
+| 0       | miss     |               | Mem[0] |        |        |        |
+| 1       | miss     |               | Mem[0] |        | Mem[1] |        |
+| 2       | miss     |               | Mem[0] | Mem[2] | Mem[1] |        |
+| 3       | miss     |               | Mem[0] | Mem[2] | Mem[1] | Mem[3] |
+| 4       | miss     | 0             | Mem[4] | Mem[2] | Mem[1] | Mem[3] |
+
+Consider the following address sequence: 0, 2, 4, 8, 10, 12, 14, 16, 0
 
 - 5.13.1 [5] <§§5.4, 5.8> Assuming an LRU replacement policy, how many hits does this address sequence exhibit?
+
+  - 5 hits
 
 - 5.13.2 [5] <§§5.4, 5.8> Assuming an MRU (most recently used) replacement policy, how many hits does this address sequence exhibit?
 
