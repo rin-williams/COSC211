@@ -25,22 +25,24 @@
 
 - 5.2.2 [10] <§5.3> For each of these references, identify the binary address, the tag, and the index given a direct-mapped cache with two-word blocks and a total size of 8 blocks. Also list if each reference is a hit or a miss, assuming the cache is initially empty.
 
-  - With two-word blocks and a total size of 8 blocks, we have 8/2 = 4 cache block. We need 2 bits to represent the index (2^2 = 4). The remaining bits will be used for the tag and the block offset.
+  - With two-word blocks and a total size of 8 blocks, 2^3 = 8, we need 3 bits to represent the index. The remaining bits will be used for the tag and the block offset.
 
   | word addy | binary addy | tag    | index given | hit/miss |
   | --------- | ----------- | ------ | ----------- | -------- |
-  | 3         | 00000011    | 000000 | 11 = 3      | miss     |
-  | 180       | 10110100    | 101101 | 00 = 0      | miss     |
-  | 43        | 00101011    | 001010 | 11 = 3      | miss     |
-  | 2         | 00000010    | 000000 | 10 = 2      | miss     |
-  | 191       | 10111111    | 101111 | 11 = 3      | miss     |
-  | 88        | 01011000    | 010110 | 00 = 0      | miss     |
-  | 190       | 10111110    | 101111 | 10 = 2      | miss     |
-  | 14        | 00001110    | 000011 | 10 = 2      | miss     |
-  | 181       | 10110101    | 101101 | 01 = 1      | miss     |
-  | 44        | 00101100    | 001011 | 00 = 0      | miss     |
-  | 186       | 10111010    | 101110 | 10 = 2      | miss     |
-  | 253       | 11111101    | 111111 | 01 = 1      | miss     |
+  | 3         | 00000011    | 000000 | 001 = 3     | miss     |
+  | 180       | 10110100    | 101101 | 000 = 0     | miss     |
+  | 43        | 00101011    | 001010 | 011 = 3     | miss     |
+  | 2         | 00000010    | 000000 | 010 = 2     | miss     |
+  | 191       | 10111111    | 101111 | 111 = 7     | miss     |
+  | 88        | 01011000    | 010110 | 000 = 0     | miss     |
+  | 190       | 10111110    | 101111 | 110 = 6     | miss     |
+  | 14        | 00001110    | 000011 | 110 = 6     | miss     |
+  | 181       | 10110101    | 101101 | 001 = 1     | miss     |
+  | 44        | 00101100    | 001011 | 100 = 4     | miss     |
+  | 186       | 10111010    | 101110 | 010 = 2     | miss     |
+  | 253       | 11111101    | 111111 | 101 = 5     | miss     |
+
+---
 
 2. 5.3 For a direct-mapped cache design with a 32-bit address, the following bits of the address are used to access the cache:
 
@@ -59,6 +61,8 @@
 - 5.3.3 [5] <§5.3> What is the ratio between total bits required for such a cache implementation over the data storage bits?
 
   $$32 \times 32 = 1024$$
+
+---
 
 3. 5.6 In this exercise, we will look at the diff erent ways capacity aff ects overall performance. In general, cache access time is proportional to capacity. Assume that main memory accesses take 70 ns and that memory accesses are 36% of all instructions. The following table shows data for L1 caches attached to each of two processors, P1 and P2
 
