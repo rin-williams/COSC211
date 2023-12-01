@@ -103,11 +103,11 @@
 
   $$P2_{miss \space penalty} = 70 - 0.90 = 69.10 \space ns$$
 
-  $$AMAT = Hit \space time + (Miss \space rate \times Miss \space penalty) $$
+  $$AMAT = Hit \space time + (Miss \space rate \times Miss \space penalty)$$
 
-  $$P1_{AMAT} = 0.66 + (0.08 \times 70 )= 6.26 \space ns $$
+  $$P1_{AMAT} = 0.66 + (0.08 \times 70 )= 6.26 \space ns$$
 
-  $$P2_{AMAT} = 0.90 + (0.06 \times 70) = 4.50 \space ns $$
+  $$P2_{AMAT} = 0.90 + (0.06 \times 70) = 4.50 \space ns$$
 
 - 5.6.3 [5] <§5.4> Assuming a base CPI of 1.0 without any memory stalls, what is the total CPI for P1 and P2? Which processor is faster?
 
@@ -135,7 +135,19 @@ Consider the following address sequence: 0, 2, 4, 8, 10, 12, 14, 16, 0
 
 - 5.13.1 [5] <§§5.4, 5.8> Assuming an LRU replacement policy, how many hits does this address sequence exhibit?
 
-  -
+  - LRU replacement policy means that the least recently used block will be evicted. The table below shows the address sequence and the corresponding hit/miss and evicted block.
+
+  | Address | Hit/Miss | Evicted block | set 0   | set 0   | set 1   | set 1   |
+  | ------- | -------- | ------------- | ------- | ------- | ------- | ------- |
+  | 0       | miss     |               | Mem[0]  |         |         |         |
+  | 2       | miss     |               | Mem[0]  | Mem[2]  |         |         |
+  | 4       | miss     | 0             | Mem[4]  | Mem[2]  |         |         |
+  | 8       | miss     |               | Mem[4]  | Mem[2]  | Mem[8]  |         |
+  | 10      | miss     | 2             | Mem[4]  | Mem[10] | Mem[8]  |         |
+  | 12      | miss     |               | Mem[4]  | Mem[10] | Mem[8]  | Mem[12] |
+  | 14      | miss     | 4             | Mem[14] | Mem[10] | Mem[8]  | Mem[12] |
+  | 16      | miss     | 8             | Mem[14] | Mem[10] | Mem[16] | Mem[12] |
+  | 0       | miss     | 14            | Mem[0]  | Mem[10] | Mem[16] | Mem[12] |
 
 - 5.13.2 [5] <§§5.4, 5.8> Assuming an MRU (most recently used) replacement policy, how many hits does this address sequence exhibit?
 
