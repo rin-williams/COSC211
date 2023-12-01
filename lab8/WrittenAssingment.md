@@ -52,15 +52,31 @@
 
 - 5.3.1 [5] <§5.3> What is the cache block size (in words)?
 
-  $$2^5 = 32 \space words$$
+  $$2^{offset \space bits} = block \space size$$
+
+  $$2^5 = 32 \space bytes$$
+
+  $$ \frac{32\space bytes}{4 \space bytes \space per \space word} = 8 \space words$$
 
 - 5.3.2 [5] <§5.3> How many entries does the cache have?
+
+  $$2^{index \space bits} = entries$$
 
   $$2^5 = 32 \space entries$$
 
 - 5.3.3 [5] <§5.3> What is the ratio between total bits required for such a cache implementation over the data storage bits?
 
-  $$32 \times 32 = 1024$$
+  $$\frac{total \space bits}{data \space bits \space per \space line} = ratio$$
+
+  $$data \space bits \space per \space line = 32 \times 8 = 256 \space bits$$
+
+  $$total \space bits = data \space bits + tag \space bits + overhead \space bits$$
+
+  $$overhead \space bits = valid \space bits + dirty \space bits$$
+
+  $$total \space bits = 256 + 22 + 2 = 280$$
+
+  $$ratio = \frac{280}{256} = 1.09375$$
 
 ---
 
@@ -105,9 +121,7 @@
 
 ---
 
-4. ![5.13](./q513.png)
-
-5.13 In this exercise, we will examine how replacement policies impact miss rate. Assume a 2-way set associative cache with 4 blocks. To solve the problems in this exercise, you may find it helpful to draw a table like the one below, as demonstrated for the address sequence "0, 1, 2, 3, 4."
+4. 5.13 In this exercise, we will examine how replacement policies impact miss rate. Assume a 2-way set associative cache with 4 blocks. To solve the problems in this exercise, you may find it helpful to draw a table like the one below, as demonstrated for the address sequence "0, 1, 2, 3, 4."
 
 | Address | Hit/Miss | Evicted block | set 0  | set 0  | set 1  | set 1  |
 | ------- | -------- | ------------- | ------ | ------ | ------ | ------ |
@@ -121,7 +135,7 @@ Consider the following address sequence: 0, 2, 4, 8, 10, 12, 14, 16, 0
 
 - 5.13.1 [5] <§§5.4, 5.8> Assuming an LRU replacement policy, how many hits does this address sequence exhibit?
 
-  - 5 hits
+  -
 
 - 5.13.2 [5] <§§5.4, 5.8> Assuming an MRU (most recently used) replacement policy, how many hits does this address sequence exhibit?
 
