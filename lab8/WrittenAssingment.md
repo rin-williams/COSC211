@@ -68,17 +68,9 @@
 
 - 5.3.3 [5] <§5.3> What is the ratio between total bits required for such a cache implementation over the data storage bits?
 
-  $$\frac{total \space bits}{data \space bits \space per \space line} = ratio$$
+  $$ratio = 1 + \frac{tag \space size + valid \space bits}{bytes \space per \space block \times 8 \space bits}$$
 
-  $$data \space bits \space per \space line = 32 \times 8 = 256 \space bits$$
-
-  $$total \space bits = data \space bits + tag \space bits + overhead \space bits$$
-
-  $$overhead \space bits = valid \space bits + dirty \space bits$$
-
-  $$total \space bits = 256 + 22 + 2 = 280$$
-
-  $$ratio = \frac{280}{256} = 1.09375$$
+  $$ratio = 1 + \frac{22 + 1}{32 \times 8} = 1.008$$
 
 ---
 
