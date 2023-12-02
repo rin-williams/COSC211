@@ -171,7 +171,7 @@ Consider the following address sequence: 0, 2, 4, 8, 10, 12, 14, 16, 0
   | 00001100 = 12 | 12 % 2 = 0  | miss     | 10           | Mem[0] | Mem[12] |       |       |
   | 00001110 = 14 | 14 % 2 = 0  | miss     | 12           | Mem[0] | Mem[14] |       |       |
   | 00010000 = 16 | 16 % 2 = 0  | miss     | 14           | Mem[0] | Mem[16] |       |       |
-  | 00000000 = 0  | 0 % 2 = 0   | hit      | 16           | Mem[0] | Mem[16] |       |       |
+  | 00000000 = 0  | 0 % 2 = 0   | hit      |              | Mem[0] | Mem[16] |       |       |
 
   - There is only one hit.
 
