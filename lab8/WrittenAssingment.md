@@ -1,5 +1,7 @@
 # Written Assignment
 
+## IMPORTANT: Please open this file in a [Markdown viewer](https://upmath.me/) to see the rendered equations or use vscode with markdown preview.
+
 1. 5.2 Caches are important to providing a high-performance memory hierarchy to processors. Below is a list of 32-bit memory address references, given as word addresses:
 
    3, 180, 43, 2, 191, 88, 190, 14, 181, 44, 186, 253
