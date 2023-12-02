@@ -167,9 +167,16 @@ Consider the following address sequence: 0, 2, 4, 8, 10, 12, 14, 16, 0
 | 00001100 = 12 | 12 % 2 = 0  | miss     | 10           | Mem[0] | Mem[12] |       |       |
 | 00001110 = 14 | 14 % 2 = 0  | miss     | 12           | Mem[0] | Mem[14] |       |       |
 | 00010000 = 16 | 16 % 2 = 0  | miss     | 14           | Mem[0] | Mem[16] |       |       |
-| 00000000 = 0  | 0 % 2 = 0   | miss     | 16           | Mem[0] | Mem[0]  |       |       |
+| 00000000 = 0  | 0 % 2 = 0   | hit      | 16           | Mem[0] | Mem[16] |       |       |
 
-- 5.13.3 [5] <§§5.4, 5.8> Simulate a random replacement policy by fl ipping a coin. For example, “heads” means to evict the fi rst block in a set and “tails” means to evict the second block in a set. How many hits does this address sequence exhibit?
+- 5.13.3 [5] <§§5.4, 5.8> Simulate a random replacement policy by flipping a coin. For example, “heads” means to evict the first block in a set and “tails” means to evict the second block in a set. How many hits does this address sequence exhibit?
+
+  - Random replacement policy means that the block to be evicted is chosen randomly. The table below shows the address sequence and the corresponding hit/miss and evicted block.
+
+  - cache index = address % number of sets = address % 2
+
+| Address | cache index | Hit/Miss | Evic'd block | set 0 | set 0 | set 1 | set 1 |
+| ------- | ----------- | -------- | ------------ | ----- | ----- | ----- | ----- |
 
 5. Given a hard disk with 512 byte sector, an 8 ms (millisecond) average seek time, a 100 Mbyte/second data (megabytes per second) transfer rate, a controller overhead of 2 ms and a rotational speed of 10,000 rpm, calculate the following. Show all calculations.
 
