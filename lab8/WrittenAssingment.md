@@ -58,7 +58,7 @@
 
   $$2^5 = 32 \space bytes$$
 
-  $$ \frac{32\space bytes}{4 \space bytes \space per \space word} = 8 \space words$$
+  $$\frac{32\space bytes}{4 \space bytes \space per \space word} = 8 \space words$$
 
 - 5.3.2 [5] <§5.3> How many entries does the cache have?
 
