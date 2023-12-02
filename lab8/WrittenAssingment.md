@@ -105,17 +105,17 @@
 
   $$AMAT = Hit \space time + (Miss \space rate \times Miss \space penalty)$$
 
-  $$P1_{AMAT} = 0.66 + (0.08 \times 70 )= 6.26 \space ns$$
+  $$P1_{AMAT} = 0.66 + (0.08 \times 69.34) = 6.25 \space ns$$
 
-  $$P2_{AMAT} = 0.90 + (0.06 \times 70) = 4.50 \space ns$$
+  $$P2_{AMAT} = 0.90 + (0.06 \times 69.10) = 4.50 \space ns$$
 
 - 5.6.3 [5] <§5.4> Assuming a base CPI of 1.0 without any memory stalls, what is the total CPI for P1 and P2? Which processor is faster?
 
   $$Cycle \space Per \space Instruction = Base \space CPI + (Miss \space rate \times Miss \space penalty)$$
 
-  $$P1_{CPI} = 1 + (0.36 \times 6.26) = 3.25$$
+  $$P1_{CPI} = 1 + (0.08 \times 69.34) = 6.25$$
 
-  $$P2_{CPI} = 1 + (0.36 \times 4.50) = 2.62$$
+  $$P2_{CPI} = 1 + (0.06 \times 69.10) = 4.50$$
 
   - P2 is faster, because it has lower CPI.
 
@@ -137,19 +137,28 @@ Consider the following address sequence: 0, 2, 4, 8, 10, 12, 14, 16, 0
 
   - LRU replacement policy means that the least recently used block will be evicted. The table below shows the address sequence and the corresponding hit/miss and evicted block.
 
-  | Address | Hit/Miss | Evicted block | set 0   | set 0   | set 1   | set 1   |
-  | ------- | -------- | ------------- | ------- | ------- | ------- | ------- |
-  | 0       | miss     |               | Mem[0]  |         |         |         |
-  | 2       | miss     |               | Mem[0]  | Mem[2]  |         |         |
-  | 4       | miss     | 0             | Mem[4]  | Mem[2]  |         |         |
-  | 8       | miss     |               | Mem[4]  | Mem[2]  | Mem[8]  |         |
-  | 10      | miss     | 2             | Mem[4]  | Mem[10] | Mem[8]  |         |
-  | 12      | miss     |               | Mem[4]  | Mem[10] | Mem[8]  | Mem[12] |
-  | 14      | miss     | 4             | Mem[14] | Mem[10] | Mem[8]  | Mem[12] |
-  | 16      | miss     | 8             | Mem[14] | Mem[10] | Mem[16] | Mem[12] |
-  | 0       | miss     | 14            | Mem[0]  | Mem[10] | Mem[16] | Mem[12] |
+  - Cache index = 2^1 = 2 bits
+
+  | Address       | cache index | Hit/Miss | Evic'd block | set 0   | set 0   | set 1   | set 1   |
+  | ------------- | ----------- | -------- | ------------ | ------- | ------- | ------- | ------- |
+  | 00000000 = 0  | 00 = 0      | miss     |              | Mem[0]  |         |         |         |
+  | 00000010 = 2  | 10 = 2      | miss     |              | Mem[0]  |         | Mem[2]  |         |
+  | 00000100 = 4  | 00 = 0      | miss     |              | Mem[0]  | Mem[4]  | Mem[2]  |         |
+  | 00001000 = 8  | 00 = 0      | miss     |              | Mem[8]  | Mem[4]  | Mem[2]  |         |
+  | 00001010 = 10 | 10 = 2      | miss     |              | Mem[8]  | Mem[4]  | Mem[2]  | Mem[10] |
+  | 00001100 = 12 | 00 = 0      | miss     |              | Mem[8]  | Mem[12] | Mem[2]  | Mem[10] |
+  | 00001110 = 14 | 10 = 2      | miss     |              | Mem[8]  | Mem[12] | Mem[14] | Mem[10] |
+  | 00010000 = 16 | 00 = 0      | miss     |              | Mem[16] | Mem[12] | Mem[14] | Mem[10] |
+  | 00000000 = 0  | 00 = 0      | miss     |              | Mem[0]  | Mem[12] | Mem[14] | Mem[10] |
 
 - 5.13.2 [5] <§§5.4, 5.8> Assuming an MRU (most recently used) replacement policy, how many hits does this address sequence exhibit?
+
+  - MRU replacement policy means that the most recently used block will be evicted. The table below shows the address sequence and the corresponding hit/miss and evicted block.
+
+  - Cache index = 2^1 = 2 bits
+
+  | Address | cache index | Hit/Miss | Evic'd block | set 0 | set 0 | set 1 | set 1 |
+  | ------- | ----------- | -------- | ------------ | ----- | ----- | ----- | ----- |
 
 - 5.13.3 [5] <§§5.4, 5.8> Simulate a random replacement policy by fl ipping a coin. For example, “heads” means to evict the fi rst block in a set and “tails” means to evict the second block in a set. How many hits does this address sequence exhibit?
 
