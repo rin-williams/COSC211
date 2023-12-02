@@ -197,6 +197,18 @@ Consider the following address sequence: 0, 2, 4, 8, 10, 12, 14, 16, 0
 
    a. The rotational latency. (2 marks) (show all work)
 
+   $$Rotational \space latency = \frac{1}{2} \times \frac{60}{rpm}$$
+
+   $$Rotational \space latency = \frac{1}{2} \times \frac{60}{10000 \space rpm} = 0.003s \space or \space 3ms$$
+
    b. The transfer time for one sector. (2 marks) (show all work)
 
+   $$Transfer \space time = \frac{sector \space size}{transfer \space rate}$$
+
+   $$Transfer \space time = \frac{512 \space bytes}{100 \space mb/s} = \frac{512 \space bytes}{100 \times 10^6 \space bytes/s} = 5.12 \times 10^{-6} \space s = 0.00512 \space ms$$
+
    c. The average read time (recall that this is the average seek time + average rotational latency + sector transfer time + controller overhead) (2 marks) (show all work)
+
+   $$Average \space read \space time = Seek \space time + Rotational \space latency + Transfer \space time + Controller \space overhead$$
+
+   $$Average \space read \space time = 8 \space ms + 3 \space ms + 0.00512 \space ms + 2 \space ms = 13.00512 \space ms$$
